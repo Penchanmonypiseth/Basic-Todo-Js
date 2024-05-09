@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Todo List</title>
+</head>
+<body>
+  <div class="h-96 w-[500px] rounded-lg border border-slate-300 bg-white p-8 hover:border-indigo-300">
+    <div class="relative left-[-4px] m-auto mb-3 flex w-[350px] justify-between rounded bg-slate-700 p-1">
+      <input type="text" placeholder="Task ID" value="1" class="h-[32px] w-[55px] rounded-sm border-none p-1 text-center text-sm outline-none" name="taskID" readonly />
+      <input type="text" placeholder="Task Name.." class="h-[32px] w-[202px] rounded-sm border-none p-1 text-sm outline-none" name="taskName" maxlength="16" />
+      <button class="text-whit h-[31.50px] w-[74px] rounded border-2 bg-slate-400 p-1 text-sm" name="buttonAdd">Add</button>
+    </div>
+    <ul class="m-auto h-[83%] w-[100%] overflow-hidden overflow-y-scroll rounded border border-slate-300 bg-[whitesmoke] text-white shadow-sm">
+      <li class="relative left-[1px] m-auto my-3 flex w-[350px] justify-between rounded bg-slate-700 p-1">
+        <span class="flex h-[32px] w-[40px] items-center justify-center bg-[#6b7684] text-center text-sm">1</span>
+        <span class="flex h-[32px] w-[190px] items-center justify-center bg-[#6b7684] text-sm line-through">Javascript</span>
+        <span class="text-md flex h-[32px] w-[30px] items-center justify-center bg-[#6b7684] text-center">&#128272;</span>
+        <span class="text-md flex h-[32px] w-[30px] items-center justify-center bg-[#6b7684] text-center">&#128272;</span>
+        <span class="text-md flex h-[32px] w-[30px] items-center justify-center bg-[#6b7684] text-center">&#128272;</span>
+      </li>
+    </ul>
+  </div>
+</body>
+<script src="/script/app.js"></script>
+</html>
