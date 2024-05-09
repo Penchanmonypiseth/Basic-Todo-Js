@@ -10,9 +10,12 @@ body{
   position: absolute;
   left: 0;
   top: 0;
-  text-indent: -99999px;
+  text-indent: -99999;
   width: 100%;
   height: 100%;
+}
+.disable_element{
+  text-indent: -999px;
 }
 .active{
   display: block;
