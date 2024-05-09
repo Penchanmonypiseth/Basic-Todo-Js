@@ -1,7 +1,7 @@
 {
   "name": "basic-todo-list",
   "version": "1.0.0",
-  "description": "in this project i show you how to starting create a basic todo list using js",
+  "description": "in this project i show you how to starting create a basic todo list using in raw js without using any frontend framework.",
   "main": "index.js",
   "dependencies": {
     "ansi-styles": "^6.2.1",
