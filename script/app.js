@@ -8,11 +8,11 @@ let taskItems = [];
 let setItemIntoLocalStorage = () => {
     localStorage.setItem("taskItems", JSON.stringify(!taskItems ? [] : taskItems));
 }
-taskItems = JSON.parse(localStorage.getItem("taskItems"));
+taskItems = JSON.parse(localStorage.getItem("taskItems")) || [];
 // ===== Loop Task Item for Display in HTML =====
 let renderTasks = () => {
     setItemIntoLocalStorage();
-    taskItems.forEach((task) => {
+    taskItems?.forEach((task) => {
         let taskTemplate = `
     <li class="list relative top-[0px] left-[5px] m-auto my-3 flex w-[350px] justify-between rounded bg-slate-700 p-1">
     <span class="flex h-[32px] w-[40px] items-center justify-center bg-[#6b7684] text-center text-sm">${task.id}</span>
@@ -69,8 +69,8 @@ let resetArray = () => {
 
 // ===== Reset Input Field =====
 let resetInputTaskName = () => {
+    randomTaskID();
     inputTaskName.value = '';
-    inputTaskID.value = ''
 }
 
 // ===== Toggle Mark Task =====
