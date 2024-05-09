@@ -3,17 +3,13 @@ let inputTaskName = document.querySelector("#taskName");
 let todoList = document.querySelector("#todoList");
 let buttonAdd = document.querySelector("#buttonAdd");
 let isEdit = false;
-let taskItems = [
-  { id: 1, taskName: 'Apple', isComplete: false },
-  { id: 2, taskName: 'Banana', isComplete: false },
-  { id: 3, taskName: 'Coconut', isComplete: true }
-]
-
+let taskItems = [];
+taskItems = JSON.parse(localStorage.getItem("taskItems"))
 // ===== Loop Task Item for Display in HTML =====
 let renderTasks = () => {
   taskItems.forEach((task) => {
     let taskTemplate = `
-    <li class="relative left-[3px] m-auto my-3 flex w-[350px] justify-between rounded bg-slate-700 p-1">
+    <li class="list relative left-[3px] m-auto my-3 flex w-[350px] justify-between rounded bg-slate-700 p-1">
           <span class="flex h-[32px] w-[40px] items-center justify-center bg-[#6b7684] text-center text-sm">${task.id}</span>
           <span class="flex h-[32px] w-[190px] items-center justify-center bg-[#6b7684] text-sm ${task.isComplete ? 'line-through' : ''}">${task.taskName}</span>
           <span class="text-md flex h-[32px] w-[30px] items-center justify-center bg-[#6b7684] text-center" onclick="toggleMark(${task.id})"> <img src="/assets/img/mark-icon.svg" alt=""></span>
@@ -22,6 +18,7 @@ let renderTasks = () => {
     </li>
     `;
     todoList.insertAdjacentHTML('beforeend', taskTemplate);
+    todoList.querySelector(".list").classList.add("fade-in");
   })
 }
 
@@ -36,10 +33,11 @@ let addTask = () => {
       taskName: inputTaskName.value,
       isComplete: false
     });
+    setItemIntoLocalStorage();
   }
   randomTaskID();
   renderTasks();
-  resetInputTaskName();
+  inputTaskName.value = ''
 }
 
 // ===== Auto ID for Task ID =====
@@ -49,9 +47,10 @@ let randomTaskID = () => {
 
 // ===== Reset Task List =====
 let resetArray = () => {
-  while (todoList.hasChildNodes()) {
-    todoList.removeChild(todoList.firstChild);
-  }
+  let liElements = todoList.querySelectorAll("li");
+  liElements.forEach(li => {
+    todoList.removeChild(li);
+  });
 }
 
 
@@ -70,13 +69,19 @@ let toggleMark = (id) => {
         task.isComplete = !task.isComplete;
       }
     });
+    setItemIntoLocalStorage();
     renderTasks();
   }
 }
 
 // ===== Remove Task =====
 let removeTask = (id) => {
-  taskItems = taskItems.filter(task => task.id != id);
+  taskItems = taskItems.filter((task) => {
+    if (task.id != id) {
+      return task;
+    }
+  });
+  setItemIntoLocalStorage();
   resetArray();
   renderTasks();
 }
@@ -84,6 +89,7 @@ let removeTask = (id) => {
 // ===== Set Data for Update into input field =====
 let editTask = (id) => {
   isEdit = true;
+  todoList.querySelector("#DisableContainer").classList.add("disabedClass");
   updateAddButtonName("Save");
   taskItems.filter((task) => {
     if (task.id == id) {
@@ -91,11 +97,13 @@ let editTask = (id) => {
       inputTaskName.value = task.taskName
     }
   });
+  setItemIntoLocalStorage();
 }
 
 // ===== Update Task =====
 let updateTask = () => {
   isEdit = false;
+  todoList.querySelector("#DisableContainer").classList.remove("disabedClass");
   updateAddButtonName("Add");
   taskItems.filter((task) => {
     if (task.id == inputTaskID.value) {
@@ -103,6 +111,7 @@ let updateTask = () => {
       task.taskName = inputTaskName.value;
     }
   });
+  setItemIntoLocalStorage();
   resetArray();
   renderTasks();
   resetInputTaskName();
@@ -117,7 +126,10 @@ buttonAdd.addEventListener("click", () => {
   isEdit ? buttonAdd.setAttribute("onclick", updateTask()) : buttonAdd.setAttribute("onclick", addTask())
 })
 
-
+// ===== Set Item to local storage =====
+let setItemIntoLocalStorage = () => {
+  localStorage.setItem("taskItems", JSON.stringify(!taskItems ? [] : taskItems));
+}
 // ===== Render Task and Auto ID =====
 renderTasks();
 randomTaskID();
