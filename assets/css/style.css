@@ -1,35 +1,45 @@
 body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
-
-.disable_element{
-    position: absolute;
-    background: rgba(128, 128, 128, 0.319);
-    height: 100%;
-    left: 0;
-    width: 100%;
-    top: 0px;
-    z-index: 1;
-    display: none;
-    text-indent: -9999px;
-}
-.active{
-  display: block;
-}
-@keyframes fadeIn {
-  from {
-      opacity: 0;
-      transform: translateY(-20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
   }
-  to {
-      opacity: 1;
-      transform: translateY(0);
+  .active_no_data{
+      position: absolute;
+      text-align: center;
+      width: 300px;
+      padding: 10px;
+      left: 50%;
+      top: 50%;
+      font-weight: bold;
+      color: black;
+      transform: translate(-50%, -50%);
   }
-}
+  .disable_element{
+      position: absolute;
+      background: rgba(128, 128, 128, 0.319);
+      height: 100%;
+      left: 0;
+      width: 100%;
+      top: 0px;
+      z-index: 1;
+      display: none;
+      text-indent: -9999px;
+  }
+  .active{
+    display: block;
+  }
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
 
-.fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }

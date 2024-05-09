@@ -22,9 +22,17 @@ let renderTasks = () => {
     <span class="text-md flex h-[32px] w-[30px] items-center justify-center bg-[#6b7684] text-center" onclick="removeTask(${task.id})"> <img src="/assets/img/delete-icon.svg" alt=""></span>
     </li>
     `;
-    todoList.insertAdjacentHTML('beforeend', taskTemplate);
-    todoList.querySelector(".list").classList.add("fade-in");
-})
+        todoList.insertAdjacentHTML('beforeend', taskTemplate);
+        todoList.querySelector(".list").classList.add("fade-in");
+    })
+    let noDataElement = document.createElement('li');
+    if (taskItems.length == 0) {
+        noDataElement.classList.add("active_no_data");
+        noDataElement.textContent = "No Data";
+        todoList.appendChild(noDataElement);
+    } else {
+        noDataElement.remove();
+    }
 }
 
 // ===== Add Task =====
@@ -47,7 +55,7 @@ let addTask = () => {
 
 // ===== Auto ID for Task ID =====
 let randomTaskID = () => {
-    return inputTaskID.value = taskItems.length + 1;
+    return inputTaskID.value = Math.floor(Math.random() * 900) + 100;
 }
 
 // ===== Reset Task List =====
